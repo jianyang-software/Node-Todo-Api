@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var Todo = mongoose.model('Todo', {
+var Todo = mongoose.model('Todo', {            //mongoose will automatically change 'Todo' to todos collection
   text: {
     type: String,
     required: true,

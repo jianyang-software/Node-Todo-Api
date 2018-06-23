@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 var {mongoose} = require('./db/mongoose');
+const {ObjectID} = require('mongodb');
 var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 
@@ -28,6 +29,31 @@ app.get('/todos', (req, res)=> {
     res.status(400).send(e);
   });
 });
+
+//GET /todos/123456
+app.get('/todos/:id', (req, res)=>{
+  var id = req.params.id;
+  if(!ObjectID.isValid(id)) {
+    return res.status(404).send('NOT valid ID');
+  }
+
+  Todo.findById(id).then((todo)=>{
+    if(!todo) {
+      return res.status(404).send('Unable to find document');
+    }
+    res.send({todo});
+  }, (e)=>{
+    res.status(404).send();
+
+  });
+  //Valid using isValid
+    //404 send back empty Second
+
+  //findById
+  // success
+  //error
+    //400 and send empty back
+})
 
 app.listen(3000, ()=>{
   console.log('Started on port 3000');
