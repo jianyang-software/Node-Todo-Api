@@ -10,7 +10,7 @@ const todos =[{
   text: 'Second test todo'
 }]
 
-beforeEach((done)=> {
+beforeEach((done)=> {                              //will reset the data base befoer each testing case
   Todo.remove({}).then(()=>{
     return Todo.insertMany(todos);
   }).then(()=>done());
