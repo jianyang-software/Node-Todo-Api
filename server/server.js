@@ -53,7 +53,7 @@ app.get('/todos/:id', (req, res)=>{
   // success
   //error
     //400 and send empty back
-})
+});
 
 app.listen(3000, ()=>{
   console.log('Started on port 3000');
