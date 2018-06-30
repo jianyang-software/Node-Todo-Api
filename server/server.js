@@ -72,19 +72,19 @@ app.delete('/todos/:id',(req,res)=>{
   });
 });
 
-app.listen(port, ()=>{
-  console.log(`Started on port ${port}`);
-});
+
 
 app.patch('/todos/:id', (req, res)=>{
   var id = req.params.id;
   var body = _.pick(req.body, ['text', 'completed']);      //only fields will be modified by user
+
   if(!ObjectID.isValid(id)) {
     return res.status(404).send("Invalid ID");
   }
 
-  if(_.isBoolean(body.completed)&& body.completed) {   //boolean and true
-    body.completeAt= new Date().getTime();
+  if(_.isBoolean(body.completed) && body.completed) {   //boolean and true
+    body.completedAt= new Date().getTime();
+
   }else {
     body.completed = false;
     body.completedAt = null;
@@ -100,7 +100,11 @@ app.patch('/todos/:id', (req, res)=>{
 
   }); //option to return new updated results not the original one
 
-})
+});
+
+app.listen(port, ()=>{
+  console.log(`Started on port ${port}`);
+});
 
 
 module.exports = {app};
